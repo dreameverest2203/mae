@@ -1,0 +1,11 @@
+CUDA_VISIBLE_DEVICES=2,3,4,5,6 python -m torch.distributed.launch --nproc_per_node=4 main_pretrain.py  --batch_size 32 \
+    --data_path "/data5/chengxuz/Dataset/imagenet_raw/" \
+    --output_dir "/data2/aamdekar/mae/pretrain_weights_noise/" \
+    --world_size 4 \
+    --accum_iter 4 \
+    --model mae_vit_base_patch16 \
+    --norm_pix_loss \
+    --mask_ratio 0.75 \
+    --epochs 20 \
+    --warmup_epochs 2 \
+    --blr 1.5e-4 --weight_decay 0.05
