@@ -38,7 +38,7 @@ import models_vit
 
 from engine_finetune import train_one_epoch, evaluate
 
-wandb.init(project="mae", group="finetune_noise_100")
+wandb.init(project="mae", group="finetune_1")
 
 
 def get_args_parser():
@@ -466,15 +466,16 @@ def main(args):
             log_writer=log_writer,
             args=args,
         )
-        if args.output_dir:
-            misc.save_model(
-                args=args,
-                model=model,
-                model_without_ddp=model_without_ddp,
-                optimizer=optimizer,
-                loss_scaler=loss_scaler,
-                epoch=epoch,
-            )
+        if (epoch + 1) == args.epochs:
+            if args.output_dir:
+                misc.save_model(
+                    args=args,
+                    model=model,
+                    model_without_ddp=model_without_ddp,
+                    optimizer=optimizer,
+                    loss_scaler=loss_scaler,
+                    epoch=epoch,
+                )
 
         test_stats = evaluate(data_loader_val, model, device)
         wandb.log(
