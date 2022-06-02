@@ -38,7 +38,7 @@ import models_vit
 
 from engine_finetune import train_one_epoch, evaluate
 
-wandb.init(project="mae", group="finetune_1")
+wandb.init(project="mae", group="finetune_10")
 
 
 def get_args_parser():

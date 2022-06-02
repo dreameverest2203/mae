@@ -1,11 +1,11 @@
-CUDA_VISIBLE_DEVICES=0,1 OMP_NUM_THREADS=1 python -m torch.distributed.launch --nproc_per_node=4 main_finetune.py \
+CUDA_VISIBLE_DEVICES=1,3,6,9 OMP_NUM_THREADS=1 python -m torch.distributed.launch --nproc_per_node=4 main_finetune.py \
     --accum_iter 4 \
-    --finetune "./pretrain_weights/checkpoint-19.pth" \
-    --output_dir "./finetune_1/" \
+    --finetune "/data/aamdekar/mae/pretrain_weights/checkpoint-19.pth" \
+    --output_dir "/data/aamdekar/mae/finetune_10/" \
     --batch_size 64 \
     --model vit_base_patch16 \
     --epochs 10 \
     --warmup_epochs 1 \
     --blr 5e-4 --layer_decay 0.65 \
     --weight_decay 0.05 --drop_path 0.1 --mixup 0.8 --cutmix 1.0 --reprob 0.25 \
-    --dist_eval --data_path "/data2/aamdekar/ImageNet_1/"
+    --dist_eval --data_path "/data2/aamdekar/ImageNet_10/"
